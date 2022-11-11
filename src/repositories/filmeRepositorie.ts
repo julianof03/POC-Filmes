@@ -31,6 +31,18 @@ async function UptadeFilmeRepository(id: number){
   return(query);
 }
 
+async function FilterPlatformRepository(platform: string){
+
+  const query: QueryArrayResult = await connection.query(`
+  SELECT * FROM "Filme" WHERE "stream" = $1`, [platform]);
+  return(query.rows);
+}
+async function FilterCategoryRepository(category: string){
+
+  const query: QueryArrayResult = await connection.query(`
+  SELECT * FROM "Filme" WHERE "category" = $1`, [category]);
+  return(query.rows);
+}
 
 
 
@@ -40,4 +52,6 @@ export {
   CreateFilme, 
   DeleteFilmeRepository, 
   UptadeFilmeRepository,
+  FilterPlatformRepository,
+  FilterCategoryRepository
 }  

@@ -3,7 +3,8 @@ import {
     CreateNewFilme,         
     DeleteFilme, 
     UpDateFilme,          
-
+    FilterPlatform,
+    FilterCategory
 } from "../controllers/filmeController.js";
 import express, { Router } from "express";
 
@@ -15,6 +16,7 @@ router.post("/", CreateNewFilme);
 router.delete("/:id", DeleteFilme);
 router.post("/:id", UpDateFilme);
 
-
+router.get("/stream/:platform", FilterPlatform);
+router.get("/category/:category", FilterCategory);
 
 export default router;

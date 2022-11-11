@@ -5,7 +5,8 @@ import {
   CreateFilme,         
   DeleteFilmeRepository,         
   UptadeFilmeRepository, 
-
+  FilterPlatformRepository,
+  FilterCategoryRepository
 } from '../repositories/filmeRepositorie.js'
 
 async function GetAllFilme(req: Request, res: Response) {
@@ -43,12 +44,32 @@ async function UpDateFilme(req: Request, res: Response) {
     res.status(500).send({ message: error.message });
   }
 }
+async function FilterPlatform(req: Request, res: Response) {
+  const platform: string = req.params.platform;
+  try {
+    const filme = await FilterPlatformRepository(platform);
+    res.status(201).send(filme);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+}
+
+async function FilterCategory(req: Request, res: Response) {
+  const category: string = req.params.category;
+  try {
+    const filme = await FilterCategoryRepository(category);
+    res.status(201).send(filme);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+}
 
 export {
     GetAllFilme,
     CreateNewFilme,
     DeleteFilme,
     UpDateFilme,
-
+    FilterPlatform,
+    FilterCategory 
   };
   
