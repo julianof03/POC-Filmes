@@ -1,12 +1,14 @@
 import express from 'express';
-import { Request, Response } from 'express';
+import filmeRouter from '../src/router/filmeRouter.js'
+import cors from "cors";
+import dotenv from "dotenv";
+
 const server = express();
+server.use(cors());
+server.use(express.json());
+dotenv.config();
 
-const valor: number = 12;
-
-server.get('/health', (req: Request, res: Response) => {
-    res.status(201).send({message: valor})
-})
+server.use(filmeRouter);
 
 server.listen(4000, ()=> {
     console.log('ta executando...')
