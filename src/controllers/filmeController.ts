@@ -1,6 +1,12 @@
 import { Request, Response } from 'express';
 import { Filme } from '../protocols/filme.js';
-import { GetFilme, CreateFilme, DeleteFilmeRepository } from '../repositories/filmeRepositorie.js'
+import { 
+  GetFilme,           
+  CreateFilme,         
+  DeleteFilmeRepository,         
+  UptadeFilmeRepository, 
+
+} from '../repositories/filmeRepositorie.js'
 
 async function GetAllFilme(req: Request, res: Response) {
     try {
@@ -28,9 +34,21 @@ async function DeleteFilme(req: Request, res: Response) {
     res.status(500).send({ message: error.message });
   }
 }
+async function UpDateFilme(req: Request, res: Response) {
+  const id: string = req.params.id;
+  try {
+    const filme = await UptadeFilmeRepository(Number(id));
+    res.status(201).send("ok");
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+}
+
 export {
     GetAllFilme,
     CreateNewFilme,
-    DeleteFilme
+    DeleteFilme,
+    UpDateFilme,
+
   };
   

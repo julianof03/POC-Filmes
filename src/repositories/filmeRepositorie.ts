@@ -13,16 +13,31 @@ async function CreateFilme(body: Filme){
     INSERT INTO "Filme" 
     ("name", "stream", "category", "watched") 
     VALUES ($1, $2, $3, $4)`, [body.name, body.stream, body.category, body.watched]);
-  return(query.rows);
+  return(query);
 }
-async function DeleteFilmeRepository(id){
+
+async function DeleteFilmeRepository(id: number){
 
   const query: QueryArrayResult = await connection.query(`
     DELETE FROM "Filme" WHERE id = $1`, [id]);
   return(query);
 }
 
+async function UptadeFilmeRepository(id: number){
+  const query: QueryArrayResult = await connection.query(`
+  UPDATE "Filme"
+  SET watched = $1
+  WHERE id = $2;`, [true, id]);
+  return(query);
+}
 
 
 
-export { GetFilme, CreateFilme, DeleteFilmeRepository }  
+
+
+export { 
+  GetFilme, 
+  CreateFilme, 
+  DeleteFilmeRepository, 
+  UptadeFilmeRepository,
+}  
