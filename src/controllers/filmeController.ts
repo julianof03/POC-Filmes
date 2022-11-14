@@ -9,7 +9,7 @@ import {
   FilterCategoryRepository
 } from '../repositories/filmeRepositorie.js'
 
-async function GetAllFilme(req: Request, res: Response) {
+async function GetAllFilme(req: Request, res: Response): Promise<void> {
     try {
         const filme = await GetFilme();
       res.status(201).send(filme.rows);
@@ -18,7 +18,7 @@ async function GetAllFilme(req: Request, res: Response) {
     }
 }
 
-async function CreateNewFilme(req: Request, res: Response) {
+async function CreateNewFilme(req: Request, res: Response): Promise<void> {
   const body = req.body as Filme;
   try {
       const filme = await CreateFilme(body);
@@ -28,7 +28,7 @@ async function CreateNewFilme(req: Request, res: Response) {
   }
 }
 
-async function DeleteFilme(req: Request, res: Response) {
+async function DeleteFilme(req: Request, res: Response): Promise<void> {
   const id = req.params.id as string;
   try {
     const filme = await DeleteFilmeRepository(Number(id));
@@ -38,7 +38,7 @@ async function DeleteFilme(req: Request, res: Response) {
   }
 }
 
-async function UpDateFilme(req: Request, res: Response) {
+async function UpDateFilme(req: Request, res: Response): Promise<void> {
   const id = req.params.id as string;
   const note = req.body.note as string;
   try {
@@ -49,7 +49,7 @@ async function UpDateFilme(req: Request, res: Response) {
   }
 }
 
-async function FilterPlatform(req: Request, res: Response) {
+async function FilterPlatform(req: Request, res: Response): Promise<void> {
   const platform = req.params.platform as string;
   try {
     const filme = await FilterPlatformRepository(platform);
@@ -59,7 +59,7 @@ async function FilterPlatform(req: Request, res: Response) {
   }
 }
 
-async function FilterCategory(req: Request, res: Response) {
+async function FilterCategory(req: Request, res: Response): Promise<void> {
   const category = req.params.category as string;
   try {
     const filme = await FilterCategoryRepository(category);
